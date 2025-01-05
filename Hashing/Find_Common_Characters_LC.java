@@ -52,6 +52,47 @@ class Solution {
         return result ; 
         
     }
+
+    public List<String> commonChars1(String[] words) {
+
+        List<String> ans = new ArrayList<>() ; 
+        int min_freq_arr[] = new int[26] ;
+        Arrays.fill( min_freq_arr , 101) ; 
+
+        for(int i=0 ; i<26 ; i++ ){
+
+            char ch  = (char)('a' + i) ; 
+            // find the freq of ch in each word
+            for(String word : words ){
+                int cur_frq = findFreq(word , ch ) ;
+                min_freq_arr[i] = Math.min(cur_frq , min_freq_arr[i] ) ;  
+            }
+        }
+
+        for(int i=0 ; i<26 ; i++ ) {
+
+            if(min_freq_arr[i] > 0 ){
+                char ch  = (char)('a' + i) ; 
+                for(int f = 1 ; f<=min_freq_arr[i] ; f++)
+                    ans.add(String.valueOf(ch)) ; 
+            }
+        }
+
+        return ans ; 
+    }
+
+    private int findFreq(String str , char ch ){
+
+        int frq = 0 ; 
+        for( int l=0 ; l<str.length() ; l++ ){
+
+            if(str.charAt(l) == ch )
+                frq ++ ; 
+        }
+
+        return frq ; 
+    }
+
 }
 
 class JavaMain {
@@ -70,7 +111,7 @@ class JavaMain {
         // int nums[] = new int[size] ;
 
         String[] words = {"bella","label","roller"}  ; 
-        out.println(sol.commonChars(words)) ;  
+        out.println(sol.commonChars1(words)) ;  
         
         close() ; 
     }
