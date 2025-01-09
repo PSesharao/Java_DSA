@@ -10,9 +10,25 @@ import java.util.stream.* ;
 class Solution{
     
    
-    // Function for finding maximum and value pair
-    public static int lenOfLongSubarr (int A[], int N, int K) {
-        //Complete the function
+    public int longestSubArrayWithSumK(int[] A , int k ) {
+
+        int len = A.length ; 
+        int ans = 0 ; 
+        int curr_sum = 0 ; 
+        Map<Integer , Integer > map = new HashMap<>() ;  
+        for(int i=0 ; i<len ; i++){
+            curr_sum += A[i] ; 
+            if(curr_sum == k ){
+                ans = Math.max(ans ,i+1) ; 
+            }else if( map.containsKey(curr_sum-k) ){
+                int j = map.get(curr_sum-k) ;
+                ans = Math.max( ans , i-j ) ; 
+            }
+            if(!map.containsKey(curr_sum))
+                map.put( curr_sum , i ) ; 
+        }
+        return ans ; 
+
     }
     
     
@@ -27,10 +43,10 @@ class JavaMain {
         initialize(); 
         Solution sol = new Solution() ; 
         
-        int arr[] = {1 , 4 , 1 , 3 , 2 , 2 } ;  
-        int k = 5 , n = 6 ; 
+        int arr[] = {10, 5, 2, 7, 1, 9} ;  
+        int k = 15 ; 
 
-        int ans = sol.getPairsCount2(arr , n , k) ;
+        int ans = sol.longestSubArrayWithSumK(arr , k) ;
         out.println(ans) ; 
         close() ; 
     }

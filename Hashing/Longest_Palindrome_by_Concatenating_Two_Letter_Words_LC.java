@@ -9,6 +9,58 @@ import java.util.stream.* ;
 
 class Solution {
 
+
+        public int longestPalindrome(List<String> words ) {
+
+        int ans = 0 ; 
+        boolean odd_occurence = false ; 
+        Map<String , Integer> fmap = new HashMap<>() ; 
+        Set<String> visited = new HashSet<>() ; 
+
+        for(String word : words ){
+            fmap.put( word , fmap.getOrDefault(word , 0 )+1 ) ; 
+        }
+
+        for( Map.Entry<String , Integer> entry : fmap.entrySet() ){
+            String word = entry.getKey() ;  
+           
+            if(!visited.contains(word)){
+
+                    int freq = entry.getValue() ; 
+                    String rev_word = "" + word.charAt(1) + word.charAt(0) ; 
+
+                    if( word.equals(rev_word) ){
+
+                        if(freq%2 == 0)
+                            ans += freq*2 ; 
+                        else 
+                        {
+                            if(!odd_occurence){
+                                ans += freq*2 ;  
+            // Take the complete frequency if there is only one occurence
+                                odd_occurence = true ; 
+                            }else 
+                                ans += (freq-1)*2 ; 
+            // Ignore one from frequency of remaining odd occurences so that 
+            // they'll become even occurences 
+                        }
+                    }else{
+
+                        int rev_freq = fmap.getOrDefault(rev_word , 0 ) ; 
+                        ans += Math.min(freq , rev_freq )*4 ; 
+                        // mutiplying with 4 , as there are reverse words also
+                    }
+
+                    visited.add(word) ; 
+                    visited.add(rev_word) ; 
+
+            }
+
+        }
+
+        return ans + max_odd ; 
+    }
+    
     public int longestPalindrome(String[] words) {
 
         boolean odd_appeared = false ; 
