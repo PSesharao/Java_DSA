@@ -40,6 +40,76 @@ class Solution {
     }
 }
 
+
+    // brute force
+    private static int findMaxSum_bf( int arr[] , int k ) {
+        
+        int N = arr.length ; 
+        int max_sum = minVal ; 
+
+        for(int s=0 ; s<=k ; s++) {         // s --> represents how many elements that we have taken from the left part
+            int curr_sum = 0 ;
+
+            // left side part sum
+            for( int l=0 ; l<s ; l++ )
+                curr_sum += arr[l] ; 
+
+            // right side part sum
+            for( int r=N-k+s ; r<N ; r++ )
+                curr_sum += arr[r] ; 
+
+            max_sum = Math.max(curr_sum , max_sum ) ; 
+        }
+
+        return max_sum ; 
+    }
+
+
+    // best approach
+    private static int findMaxSum_op( int arr[] , int k ) {
+
+        int N = arr.length ; 
+        int max_sum = minVal ; 
+
+        int [] pref_sum = new int[N] ; 
+        int [] suff_sum = new int[N] ; 
+
+        Arrays.fill(pref_sum , 0 ) ; 
+        Arrays.fill(suff_sum , 0 ) ; 
+
+        pref_sum[0] = arr[0] ; 
+
+        for( int l=1 ; l<N ; l++ )
+            pref_sum[l] = pref_sum[l-1]+ arr[l] ;
+
+        suff_sum[N-1] = arr[N-1] ; 
+
+        for( int r=N-2 ; r>=0 ; r-- )
+            suff_sum[r] = suff_sum[r+1] + arr[r] ;
+
+        for( int s=0 ; s<=k ; s++ ) { 
+
+            int l = s-1 , r = N-k+s ; 
+            int left_sum , right_sum  ;
+
+            if(l == -1)
+                left_sum = 0 ; 
+            else
+                left_sum = pref_sum[l] ; 
+
+            if(r == N)
+                right_sum = 0 ;
+            else
+                right_sum = suff_sum[r] ; 
+
+            int curr_sum = left_sum + right_sum ; 
+            max_sum = Math.max(curr_sum , max_sum ) ; 
+        }
+
+        return max_sum ; 
+
+    }
+
 class JavaMain {
 
     private static FastReader in;
