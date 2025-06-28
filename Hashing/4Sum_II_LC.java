@@ -49,11 +49,11 @@ class JavaMain {
 
     public static void main(String[] args) throws IOException  {
         initialize(); 
-        Solution sol = new Solution() ; 
-        String name = in.nextLine() ; 
-        out.println(name) ; 
-        out.println(sol.greetUser(name)) ;  
-        out.println("How are you all doing ? ") ; 
+        int[] nums1 = {1, 0, -1, 2} ; 
+        int[] nums2 = {-1, 0, 1, -2}; 
+        int[] nums3 = {0, 0, 1, -1};
+        int[] nums4 = {0, 0, 1, -1}; 
+        int ans  = fourSumCount( nums1 , nums2 , nums3 , nums4 ) ; // Op : 52
         close() ; 
     }
 
