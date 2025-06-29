@@ -23,6 +23,46 @@ class JavaMain {
     private static FastReader in;
     private static FastWriter out ;
 
+    // 0 - based indexing
+    public static int findNumberOfQuadruplets( int arr[] ){
+
+        int N = arr.length ;  
+        if(N == 0 || N == 1 || N == 2 || N == 3)
+            return 0 ; 
+        int ans = 0 ;
+        int prefix[] = new int[N] ;  
+        int suffix[] = new int[N] ;  
+        Arrays.fill(prefix , 0 ) ; 
+        Arrays.fill(suffix , 0 ) ; 
+
+        // A[i] > A[j] < A[k] >A[l]
+
+        // A[i] > A[j] -- prefix 
+        for(int j=1 ; j<N-2 ; j++ ){
+            for(int i=0 ; i<j ; i++ )
+                if( arr[i] > arr[j] )
+                    prefix[j]++ ; 
+
+        }
+
+        // A[k] >A[l] -- suffix
+        for(int k=2 ; k<N-1 ; k++ ){
+            for(int l=k+1 ; l<N ; l++)
+                if(arr[k] > arr[l])
+                    suffix[k]++ ; 
+        }
+
+        // check for A[j] < A[k]
+        for(int j=1 ; j<N-2 ; j++ ){
+            for(int k=j+1 ; k<N-1 ; k++ )
+                if(arr[j] < arr[k])
+                    ans += prefix[j] * suffix[k] ; 
+        }
+
+        return ans ; 
+
+    } 
+
     public static int findNumberOfQuadraplets( int arr[] )  {
 
         int N = arr.length-1 ; 
