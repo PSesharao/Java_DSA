@@ -60,14 +60,16 @@ class JavaMain {
 
     public static int findNumberOfQuadraplets( int A[] , int sum ) {
         
+        // Store the frequency of sum of first two elements
         Map<Integer, Integer> map = new HashMap<>();
         int N = A.length ; 
         int count = 0 ; 
         
-
+        // Traverse from 0 to n-1, where arr[i] is the 3rd element
         for(int i=0 ; i<N-1 ; i++ ){
 
             // for last 2 elements 
+            // All possible 4th elements , where arr[j] is the 4th element
             for(int j=i+1 ; j<N ; j++ ){
 
                 int req = sum - (A[i] +  A[j]) ;
@@ -76,6 +78,7 @@ class JavaMain {
             }
 
             // for first 2 elements 
+            // All possible 1st elements , where arr[j] is the 1st element
             for(int j=0 ; j<i ; j++ ){
 
                 int s = (A[i] +  A[j]) ; 
