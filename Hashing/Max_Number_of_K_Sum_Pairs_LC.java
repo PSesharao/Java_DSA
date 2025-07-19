@@ -1,4 +1,5 @@
 // https://leetcode.com/problems/max-number-of-k-sum-pairs/
+// https://docs.google.com/document/d/10mhea8Ojo3maAkVpYeTKle3sanTz5ESSdXtYPo0p0Fg/edit?tab=t.0
 
 import java.io.*;
 import java.util.*;
