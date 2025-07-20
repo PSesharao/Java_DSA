@@ -38,7 +38,9 @@ class Solution {
 
         int count = 0 ; 
         for(int i=0; i<n ; i++ ){
-
+            // We do not need to check for the condition if mountains len>=3 
+            // because if len =3 then pref[i] = suf[i] = 2 , and for all other cases 
+            // where len < 3 will be taken care by default as pref[i] = suf[i] = 1
             count += ( pref[i]-1 ) * ( suf[i]-1 ) ;
 
         }
