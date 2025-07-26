@@ -86,7 +86,7 @@ class JavaMain {
     public static void main(String[] args) throws IOException  {
         initialize(); 
         Solution sol = new Solution() ; 
-        int arr[] = { 5 , -8 , 1 , 1 , 5 } ; 
+        int arr[] = { 5 , -8 , 1 , 1 , 5 } ; // o/p : 12 
         int ans = sol.maxNonOverlappingSum2_better( arr ) ;
         out.println( ans ) ; 
         close() ; 
