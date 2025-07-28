@@ -17,6 +17,7 @@ class Pair {
         this.pref_sum = pref_sum;
     }
 
+    // simplest form of equals
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -33,6 +34,7 @@ class Pair {
                 '}';
     }
 
+    // simplest form of hash code
     @Override
     public int hashCode() {
         return Objects.hash(pref_sum, value);
@@ -64,6 +66,24 @@ class Solution {
 
         return count ;
 
+    }
+
+    private static int findNumberOfSubarrays_(int[] arr ) {
+
+        int N = arr.length ; 
+        int pref_sum = 0;
+
+        Map<Pair , Integer > map = new HashMap<>() ; 
+        int ans = 0 ;
+        for(int j=0 ; j<N ; j++ ){ 
+            pref_sum += arr[j] ;
+            int val = arr[j] ;
+            Pair key = new Pair(pref_sum - 2*arr[j] , val ) ; 
+            ans += map.getOrDefault(key , 0) ; 
+            Pair pair = new Pair(pref_sum , val ) ; 
+            map.put( pair , map.getOrDefault(pair , 0)+1 );
+        } 
+        return ans ; 
     }
 }
 
